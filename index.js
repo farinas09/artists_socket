@@ -7,17 +7,8 @@ const app = express();
 
 //node server
 const server = require("http").createServer(app);
-const io = require("socket.io")(server);
-
-// socket messages
-
-io.on("connection", (client) => {
-  console.log("Client Connected");
-  client.on("addArtist", () => {});
-  client.on("disconnect", () => {
-    console.log("Client Disconnected");
-  });
-});
+module.exports.io = require("socket.io")(server);
+require("./sockets/socket");
 
 const publicPath = path.resolve(__dirname, "public");
 

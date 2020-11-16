@@ -15,6 +15,10 @@
         socket.on('connect', function(){
             console.log('Connected to server')
         });
+        socket.emit('addArtist', {name: 'Prueba1'});
+        socket.on('addArtist', function(data){
+            console.log('Artist Added', data)
+        });
         socket.on('disconnect', function(){
             console.log('Disconnected to server')
         });
