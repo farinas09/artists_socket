@@ -6,8 +6,7 @@ io.on("connection", (client) => {
   console.log("Client Connected");
 
   client.on("addArtist", (data) => {
-    console.log("Artist Added", data);
-    io.emit("addArtist", { artist: data });
+    client.broadcast.emit("addArtist", { artist: data });
   });
   client.on("disconnect", () => {
     console.log("Client Disconnected");
