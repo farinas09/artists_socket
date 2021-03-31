@@ -12,4 +12,7 @@ io.on("connection", (client) => {
   client.on("disconnect", () => {
     console.log("Client Disconnected");
   });
+  client.on("emit-message", (data) => {
+    io.emit("new-message", "new message!!!!");
+  });
 });
