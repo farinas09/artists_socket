@@ -16,10 +16,11 @@ io.on("connection", (client) => {
   client.on("addArtist", (data) => {
     client.broadcast.emit("addArtist", { artist: data });
   });
+  client.on("add-vote", (data) => {
+    artists.voteArtist(data.id);
+    io.emit("active-artists", artists.getArtists());
+  });
   client.on("disconnect", () => {
     console.log("Client Disconnected");
-  });
-  client.on("emit-message", (data) => {
-    io.emit("new-message", "new message!!!!");
   });
 });
