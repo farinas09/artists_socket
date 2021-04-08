@@ -13,8 +13,13 @@ io.on("connection", (client) => {
 
   client.emit('active-artists', artists.getArtists());
 
-  client.on("addArtist", (data) => {
-    client.broadcast.emit("addArtist", { artist: data });
+  client.on("add-artist", (data) => {
+    artists.addArtist(new Artist(data.name));
+    io.emit("active-artists", artists.getArtists());
+  });
+  client.on("delete-artist", (data) => {
+    artists.deleteArtist(data.id);
+    io.emit("active-artists", artists.getArtists());
   });
   client.on("add-vote", (data) => {
     artists.voteArtist(data.id);
